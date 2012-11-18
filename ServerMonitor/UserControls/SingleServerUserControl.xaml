@@ -1,0 +1,65 @@
+﻿<UserControl
+    x:Class="ServerMonitor.UserControls.SingleServerUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ServerMonitor.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="150"
+    d:DesignWidth="400">
+
+    <Grid Width="400">
+        <Grid Background="DarkSlateBlue" Visibility="{Binding DataLoader.IsBusy, Converter={StaticResource Vis}}"></Grid>
+        <Grid Background="#6B1513" Visibility="{Binding DataLoader.IsError, Converter={StaticResource Vis}}"></Grid>
+        <Grid Background="#5FA161" Visibility="{Binding DataLoader.IsFinished, Converter={StaticResource Vis}}"></Grid>
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid Background="Black" Opacity="0.2" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Width="90" Padding="20">
+
+                    <Path Data="F1M87.5156,1756.7617C87.5156,1757.3117,87.0656,1757.7617,86.5156,1757.7617L75.0586,1757.7617C74.5086,1757.7617,74.0586,1757.3117,74.0586,1756.7617L74.0586,1756.2247C74.0586,1755.6747,74.5086,1755.2247,75.0586,1755.2247L86.5156,1755.2247C87.0656,1755.2247,87.5156,1755.6747,87.5156,1756.2247z M87.5156,1761.7797C87.5156,1762.3287,87.0656,1762.7797,86.5156,1762.7797L75.0586,1762.7797C74.5086,1762.7797,74.0586,1762.3287,74.0586,1761.7797L74.0586,1761.2407C74.0586,1760.6917,74.5086,1760.2407,75.0586,1760.2407L86.5156,1760.2407C87.0656,1760.2407,87.5156,1760.6917,87.5156,1761.2407z M87.5156,1766.7977C87.5156,1767.3477,87.0656,1767.7977,86.5156,1767.7977L75.0586,1767.7977C74.5086,1767.7977,74.0586,1767.3477,74.0586,1766.7977L74.0586,1766.2597C74.0586,1765.7097,74.5086,1765.2597,75.0586,1765.2597L86.5156,1765.2597C87.0656,1765.2597,87.5156,1765.7097,87.5156,1766.2597z M80.7876,1779.7467C80.0646,1779.7467 79.4736,1779.1617 79.4736,1778.4357 79.4736,1777.7107 80.0646,1777.1247 80.7876,1777.1247 81.5136,1777.1247 82.1006,1777.7107 82.1006,1778.4357 82.1006,1779.1617 81.5136,1779.7467 80.7876,1779.7467 M71.6306,1751.2377C71.0806,1751.2377,70.6306,1751.6877,70.6306,1752.2377L70.6306,1782.7387C70.6306,1783.2877,71.0806,1783.7387,71.6306,1783.7387L89.9446,1783.7387C90.4946,1783.7387,90.9446,1783.2877,90.9446,1782.7387L90.9446,1752.2377C90.9446,1751.6877,90.4946,1751.2377,89.9446,1751.2377z" 
+        		 Fill="White"
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="UniformToFill"
+                 >
+
+                    </Path>
+                </Border>
+
+                <Border Grid.Row="1" Height="40">
+                    <TextBlock FontSize="20" Margin="10,0,10,0" TextTrimming="WordEllipsis" Text="{Binding Name}"></TextBlock>
+                </Border>
+            </Grid>
+        </Grid>
+       
+      
+        
+        <Grid Grid.Column="1" Margin="20,15" >
+                <StackPanel Visibility="{Binding DataLoader.IsBusy, Converter={StaticResource Vis}}">
+                    <TextBlock Style="{StaticResource BasicTextStyle}">Checking status...</TextBlock>
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding DataLoader.IsError, Converter={StaticResource Vis}}">
+                    <TextBlock Style="{StaticResource BasicTextStyle}">Server is down.</TextBlock>
+                    <TextBlock Style="{StaticResource BasicTextStyle}" Text="{Binding ErrorMsg}"></TextBlock>
+
+                </StackPanel>
+
+                <StackPanel Visibility="{Binding DataLoader.IsFinished, Converter={StaticResource Vis}}">
+                    <TextBlock Style="{StaticResource BasicTextStyle}">Server is up and running.</TextBlock>
+                </StackPanel>
+            </Grid>
+
+    </Grid>
+    </Grid>
+</UserControl>
